@@ -1,9 +1,10 @@
 typedef struct nodo * ptr_nodo;
+//estrutura do nó: estrutura atual - ponteiro do próximo
 struct nodo {
   dado banco;
   ptr_nodo prox;
 };
-
+//estrutura da lista: tamanho - ponteiro da lista
 typedef struct {
   int tamanho;
   ptr_nodo lista;
@@ -13,12 +14,18 @@ typedef Lista_encadeada tipo_lista;
 
 int tamanho(Lista_encadeada le);
 int init(Lista_encadeada *le); //start lista
+//ainda em teste
+//lista / limite inputado
 int max(Lista_encadeada *le, int lim);
 
-//funcções de dados
+//funções de dados
+// lista do db / posição final - tamanho / elemento
 int post(Lista_encadeada *le, int pos, dado input); //create
+// lista do db / posição a obter / elemento
 int get(Lista_encadeada le, int pos, dado *pessoa); //read
+//lista banco / posição editar / elemento
 int put(Lista_encadeada *le, int pos, dado *input); //update
+//lista banco / posição a excluir
 int del(Lista_encadeada *le, int pos); //delete
 
 int tamanho(Lista_encadeada le) { 
@@ -31,18 +38,8 @@ int init(Lista_encadeada *le) {
 }
 
 //lista
-// lista do db / posição final - tamanho / elemento
 int post(Lista_encadeada *le, int pos, dado input) {
   ptr_nodo pnodo_atual, pnodo_anterior, pnodo_max;
-  //TESTE DE APLICAÇÃO DO LIMITE DA LISTA
-  // pnodo_max = le->lista;
-  // for(int i = 1; i <= le->tamanho; i++){
-  //   if(pnodo_max->prox == NULL){
-      
-  //   }else{
-  //     pnodo_max = pnodo_max->prox;
-  //   }
-  // }
   if ((pos > 0) && (pos <= le->tamanho + 1)) {
     pnodo_atual = (ptr_nodo)malloc(sizeof(struct nodo));
     if (pnodo_atual != NULL) {
@@ -76,7 +73,6 @@ int push_fila(Lista_encadeada *le, dado input){
   post();
 }
 
-// lista do db / posição a obter / elemento
 int get(Lista_encadeada le, int pos, dado *pessoa) {
 	int j; ptr_nodo pnodo;
 	if ((pos <= le.tamanho) && (pos > 0)) {
@@ -87,12 +83,11 @@ int get(Lista_encadeada le, int pos, dado *pessoa) {
       	return 1;
 	}
 	else {
-		  *pessoa = VL_NULO;
+		*pessoa = VL_NULO;
       return 0;
 	}
 }
 
-//lista banco / posição editar / elemento
 int put(Lista_encadeada *le, int pos, dado *input){
   ptr_nodo pnodo_alterado;
   if((pos > 0) && (pos <= le->tamanho)){
@@ -107,7 +102,6 @@ int put(Lista_encadeada *le, int pos, dado *input){
   }
 }
 
-//lista banco / posição a excluir
 int del(Lista_encadeada *le, int pos){
   ptr_nodo pnodo_excluido, pnodo_anterior;
     if((pos > 0) && (pos <= le->tamanho)){
@@ -130,6 +124,7 @@ int del(Lista_encadeada *le, int pos){
     }
 }
 
+//implementação teste para limitação de tamanho
 int max(Lista_encadeada *le, int lim){
   ptr_nodo pnodo;
   if((lim > 0) && (lim <= le->tamanho)){
