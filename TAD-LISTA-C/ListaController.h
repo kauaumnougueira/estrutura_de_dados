@@ -1,7 +1,7 @@
 typedef struct nodo * ptr_nodo;
 //estrutura do nó: estrutura atual - ponteiro do próximo
 struct nodo {
-  dado banco;
+  dado banco; //estrutura salva
   ptr_nodo prox;
 };
 //estrutura da lista: tamanho - ponteiro da lista
